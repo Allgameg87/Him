@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Углеводы - Химическая презентация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow-y: auto;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide h1 {
+            color: #4a5568;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide h2 {
+            color: #2d3748;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .slide h3 {
+            color: #4a5568;
+            font-size: 1.8em;
+            margin: 20px 0 15px 0;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .slide ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .molecule-structure {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+
+        .property-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .property-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #4a5568;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .chemical-formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.3em;
+            color: #e53e3e;
+            font-weight: bold;
+            background: #fed7d7;
+            padding: 5px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .slide h1 {
+                font-size: 2.2em;
+            }
+            
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation {
+                bottom: 20px;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                padding: 10px 16px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">12</span>
+        </div>
+
+        <!-- Слайд 1: Титульный -->
+        <div class="slide active">
+            <h1>УГЛЕВОДЫ</h1>
+            <div style="text-align: center; margin-top: 50px;">
+                <h2 style="color: #667eea; border: none;">Презентация по химии от Чиркина Е.А.</h2>
+                <p style="font-size: 1.5em; margin-top: 30px; color: #4a5568;">
+                    Общая характеристика, строение и свойства<br>
+                    моносахаридов, дисахаридов и полисахаридов
+                </p>
+            </div>
+        </div>
+
+        <!-- Слайд 2: Общая характеристика углеводов -->
+        <div class="slide">
+            <h1>Общая характеристика углеводов</h1>
+            
+            <h2>Определение</h2>
+            <p><span class="highlight">Углеводы</span> — органические соединения, содержащие карбонильную группу и несколько гидроксильных групп.</p>
+            
+            <h2>Общая формула</h2>
+            <div class="molecule-structure">
+                <span class="chemical-formula">C<sub>n</sub>(H<sub>2</sub>O)<sub>m</sub></span>
+            </div>
+            
+            <h2>Классификация</h2>
+            <ul>
+                <li><strong>Моносахариды</strong> — простейшие углеводы (глюкоза, фруктоза)</li>
+                <li><strong>Дисахариды</strong> — состоят из двух моносахаридов (сахароза, лактоза)</li>
+                <li><strong>Полисахариды</strong> — полимеры моносахаридов (крахмал, целлюлоза)</li>
+            </ul>
+            
+            <h2>Биологическая роль</h2>
+            <ul>
+                <li>Основной источник энергии</li>
+                <li>Структурный компонент клеток</li>
+                <li>Запасные вещества</li>
+                <li>Регуляторные функции</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 3: Моносахариды - общее -->
+        <div class="slide">
+            <h1>Моносахариды</h1>
+            
+            <h2>Определение</h2>
+            <p><span class="highlight">Моносахариды</span> — простейшие углеводы, которые не гидролизуются до более простых соединений.</p>
+            
+            <h2>Общие свойства</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белые кристаллические вещества</li>
+                        <li>Сладкий вкус</li>
+                        <li>Хорошо растворяются в воде</li>
+                        <li>Плохо растворяются в спирте</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Реакции окисления</li>
+                        <li>Реакции восстановления</li>
+                        <li>Образование гликозидов</li>
+                        <li>Мутаротация</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Строение</h2>
+            <p>Моносахариды могут существовать в линейной и циклической формах. Циклическая форма образуется при взаимодействии карбонильной группы с гидроксильной группой.</p>
+        </div>
+
+        <!-- Слайд 4: Глюкоза - строение -->
+        <div class="slide">
+            <h1>Глюкоза</h1>
+            <h2>Строение молекулы</h2>
+            
+            <h3>Молекулярная формула</h3>
+            <div class="molecule-structure">
+                <span class="chemical-formula">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></span>
+            </div>
+            
+            <h3>Линейная форма (альдегидная)</h3>
+            <div class="molecule-structure">
+                <span class="chemical-formula">CH<sub>2</sub>OH-CHOH-CHOH-CHOH-CHOH-CHO</span>
+            </div>
+            
+            <h3>Циклическая форма (пиранозная)</h3>
+            <div class="molecule-structure">
+                <p>Глюкоза образует 6-членный пиранозный цикл</p>
+                <p>Существует в α- и β-формах (аномеры)</p>
+                <p>В растворе происходит мутаротация между формами</p>
+            </div>
+            
+            <h3>Стереоизомерия</h3>
+            <p>Глюкоза имеет 4 хиральных центра → 16 стереоизомеров</p>
+            <p>D-глюкоза — наиболее распространенная в природе</p>
+        </div>
+
+        <!-- Слайд 5: Глюкоза - свойства -->
+        <div class="slide">
+            <h1>Глюкоза - Свойства</h1>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белые кристаллы</li>
+                        <li>Температура плавления: 146°C</li>
+                        <li>Хорошо растворима в воде</li>
+                        <li>Сладкий вкус</li>
+                        <li>Оптически активна</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Восстанавливает реактив Толленса</li>
+                        <li>Восстанавливает Cu(OH)<sub>2</sub></li>
+                        <li>Окисляется до глюконовой кислоты</li>
+                        <li>Брожение (спиртовое, молочнокислое)</li>
+                        <li>Образование гликозидов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Получение</h2>
+            <ul>
+                <li>Гидролиз крахмала под действием кислот или ферментов</li>
+                <li>Фотосинтез в растениях</li>
+                <li>Гликогенолиз в животных</li>
+            </ul>
+            
+            <h2>Применение</h2>
+            <ul>
+                <li>Пищевая промышленность (подсластитель)</li>
+                <li>Медицина (раствор для инъекций)</li>
+                <li>Производство этилового спирта</li>
+                <li>Биотехнология</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 6: Фруктоза -->
+        <div class="slide">
+            <h1>Фруктоза</h1>
+            <h2>Строение молекулы</h2>
+            
+            <h3>Молекулярная формула</h3>
+            <div class="molecule-structure">
+                <span class="chemical-formula">C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></span>
+            </div>
+            
+            <h3>Структура</h3>
+            <div class="molecule-structure">
+                <span class="chemical-formula">CH<sub>2</sub>OH-CO-CHOH-CHOH-CHOH-CH<sub>2</sub>OH</span>
+                <p>Кетогексоза с кетонной группой во 2-м положении</p>
+            </div>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белые кристаллы</li>
+                        <li>Температура плавления: 102°C</li>
+                        <li>Самый сладкий моносахарид</li>
+                        <li>Хорошо растворима в воде</li>
+                        <li>Оптически активна</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Кето-енольная таутомерия</li>
+                        <li>Образование фуранозного цикла</li>
+                        <li>Реакции с основаниями</li>
+                        <li>Брожение</li>
+                        <li>Образование гликозидов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Получение и применение</h2>
+            <ul>
+                <li><strong>Получение:</strong> гидролиз сахарозы, изомеризация глюкозы</li>
+                <li><strong>Применение:</strong> пищевая промышленность, диетические продукты, мед</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 7: Дисахариды - общее -->
+        <div class="slide">
+            <h1>Дисахариды</h1>
+            
+            <h2>Определение</h2>
+            <p><span class="highlight">Дисахариды</span> — углеводы, состоящие из двух остатков моносахаридов, соединенных гликозидной связью.</p>
+            
+            <h2>Типы гликозидных связей</h2>
+            <ul>
+                <li><strong>α-1,4-гликозидная связь</strong> — в мальтозе</li>
+                <li><strong>β-1,4-гликозидная связь</strong> — в целлобиозе</li>
+                <li><strong>α,β-1,2-гликозидная связь</strong> — в сахарозе</li>
+            </ul>
+            
+            <h2>Общие свойства</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Кристаллические вещества</li>
+                        <li>Сладкий вкус</li>
+                        <li>Хорошая растворимость в воде</li>
+                        <li>Высокая температура плавления</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Гидролиз до моносахаридов</li>
+                        <li>Реакции с кислотами</li>
+                        <li>Образование производных</li>
+                        <li>Ферментативное расщепление</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 8: Сахароза -->
+        <div class="slide">
+            <h1>Сахароза (Сахар)</h1>
+            <h2>Строение молекулы</h2>
+            
+            <h3>Молекулярная формула</h3>
+            <div class="molecule-structure">
+                <span class="chemical-formula">C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></span>
+            </div>
+            
+            <h3>Структура</h3>
+            <div class="molecule-structure">
+                <p>Состоит из α-D-глюкозы и β-D-фруктозы</p>
+                <p>Соединены α,β-1,2-гликозидной связью</p>
+                <p>Не имеет свободной карбонильной группы</p>
+            </div>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белые кристаллы</li>
+                        <li>Температура плавления: 186°C</li>
+                        <li>Хорошо растворима в воде</li>
+                        <li>Сладкий вкус</li>
+                        <li>Оптически активна</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Не восстанавливает реактив Толленса</li>
+                        <li>Гидролиз в кислой среде</li>
+                        <li>Инверсия сахарозы</li>
+                        <li>Карамелизация при нагревании</li>
+                        <li>Образование сахаратов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Получение</h2>
+            <ul>
+                <li>Из сахарного тростника (тропические регионы)</li>
+                <li>Из сахарной свеклы (умеренные широты)</li>
+                <li>Экстракция, очистка, кристаллизация</li>
+            </ul>
+            
+            <h2>Применение</h2>
+            <ul>
+                <li>Пищевая промышленность</li>
+                <li>Кондитерские изделия</li>
+                <li>Консервирование</li>
+                <li>Фармацевтика</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 9: Полисахариды - общее -->
+        <div class="slide">
+            <h1>Полисахариды</h1>
+            
+            <h2>Определение</h2>
+            <p><span class="highlight">Полисахариды</span> — высокомолекулярные углеводы, состоящие из большого количества остатков моносахаридов.</p>
+            
+            <h2>Классификация</h2>
+            <ul>
+                <li><strong>Гомополисахариды</strong> — состоят из одинаковых моносахаридов</li>
+                <li><strong>Гетерополисахариды</strong> — состоят из разных моносахаридов</li>
+            </ul>
+            
+            <h2>Общие свойства</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Аморфные или частично кристаллические</li>
+                        <li>Ограниченная растворимость в воде</li>
+                        <li>Высокая вязкость растворов</li>
+                        <li>Отсутствие сладкого вкуса</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Постепенный гидролиз</li>
+                        <li>Образование комплексов с ионами</li>
+                        <li>Ферментативное расщепление</li>
+                        <li>Образование гелей</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Биологические функции</h2>
+            <ul>
+                <li>Запасные вещества (крахмал, гликоген)</li>
+                <li>Структурные компоненты (целлюлоза, хитин)</li>
+                <li>Защитные функции (мукополисахариды)</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 10: Крахмал -->
+        <div class="slide">
+            <h1>Крахмал</h1>
+            <h2>Строение молекулы</h2>
+            
+            <h3>Состав</h3>
+            <div class="molecule-structure">
+                <p>Смесь двух полисахаридов:</p>
+                <p><strong>Амилоза</strong> (20-30%) — линейный полимер α-D-глюкозы</p>
+                <p><strong>Амилопектин</strong> (70-80%) — разветвленный полимер α-D-глюкозы</p>
+            </div>
+            
+            <h3>Структурные особенности</h3>
+            <ul>
+                <li>Амилоза: α-1,4-гликозидные связи, спиральная структура</li>
+                <li>Амилопектин: α-1,4- и α-1,6-гликозидные связи, разветвления</li>
+                <li>Молекулярная масса: 10<sup>5</sup> - 10<sup>6</sup> Да</li>
+            </ul>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белый порошок</li>
+                        <li>Нерастворим в холодной воде</li>
+                        <li>Набухает в горячей воде</li>
+                        <li>Образует клейстер</li>
+                        <li>Гранулярная структура</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Гидролиз под действием кислот</li>
+                        <li>Ферментативное расщепление</li>
+                        <li>Образование комплексов с йодом</li>
+                        <li>Клейстеризация при нагревании</li>
+                        <li>Ретроградация при охлаждении</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Получение и применение</h2>
+            <ul>
+                <li><strong>Получение:</strong> из картофеля, кукурузы, риса, пшеницы</li>
+                <li><strong>Применение:</strong> пищевая промышленность, текстильная промышленность, бумажная промышленность, фармацевтика</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 11: Целлюлоза -->
+        <div class="slide">
+            <h1>Целлюлоза</h1>
+            <h2>Строение молекулы</h2>
+            
+            <h3>Состав</h3>
+            <div class="molecule-structure">
+                <p>Линейный полимер β-D-глюкозы</p>
+                <p>Соединены β-1,4-гликозидными связями</p>
+                <span class="chemical-formula">(C<sub>6</sub>H<sub>10</sub>O<sub>5</sub>)<sub>n</sub></span>
+            </div>
+            
+            <h3>Структурные особенности</h3>
+            <ul>
+                <li>Линейная неразветвленная структура</li>
+                <li>Параллельное расположение цепей</li>
+                <li>Водородные связи между цепями</li>
+                <li>Кристаллическая структура</li>
+                <li>Молекулярная масса: 10<sup>5</sup> - 10<sup>7</sup> Да</li>
+            </ul>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>Физические свойства</h4>
+                    <ul>
+                        <li>Белые волокна</li>
+                        <li>Нерастворима в воде</li>
+                        <li>Нерастворима в органических растворителях</li>
+                        <li>Высокая механическая прочность</li>
+                        <li>Химическая устойчивость</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>Химические свойства</h4>
+                    <ul>
+                        <li>Гидролиз в кислой среде</li>
+                        <li>Образование эфиров</li>
+                        <li>Образование комплексов с основаниями</li>
+                        <li>Ферментативное расщепление</li>
+                        <li>Горение</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Получение и применение</h2>
+            <ul>
+                <li><strong>Получение:</strong> из древесины, хлопка, льна, конопли</li>
+                <li><strong>Применение:</strong> производство бумаги, текстильная промышленность, строительство, химическая промышленность</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 12: Заключение -->
+        <div class="slide">
+            <h1>Заключение</h1>
+            
+            <h2>Значение углеводов</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <h4>В природе</h4>
+                    <ul>
+                        <li>Основной источник энергии</li>
+                        <li>Структурные компоненты</li>
+                        <li>Запасные вещества</li>
+                        <li>Защитные функции</li>
+                    </ul>
+                </div>
+                <div class="property-card">
+                    <h4>В промышленности</h4>
+                    <ul>
+                        <li>Пищевая промышленность</li>
+                        <li>Текстильная промышленность</li>
+                        <li>Фармацевтика</li>
+                        <li>Биотехнология</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Классификация углеводов</h2>
+            <div style="text-align: center; margin: 30px 0;">
+                <h3 style="color: #667eea;">Моносахариды</h3>
+                <p>Глюкоза, Фруктоза</p>
+                
+                <h3 style="color: #667eea;">Дисахариды</h3>
+                <p>Сахароза</p>
+                
+                <h3 style="color: #667eea;">Полисахариды</h3>
+                <p>Крахмал, Целлюлоза</p>
+            </div>
+            
+            <h2>Благодарим за внимание!</h2>
+            <p style="text-align: center; font-size: 1.5em; color: #4a5568; margin-top: 30px;">
+                Углеводы — основа жизни на Земле
+            </p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">← Назад</button>
+        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Вперед →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        
+        document.getElementById('total-slides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            
+            // Обновляем состояние кнопок
+            document.getElementById('prev-btn').disabled = currentSlide === 0;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
+        }
+        
+        function changeSlide(direction) {
+            if (direction === 1 && currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            } else if (direction === -1 && currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        // Навигация с клавиатуры
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+        
+        // Инициализация
+        showSlide(0);
+    </script>
+</body>
+</html>
+
